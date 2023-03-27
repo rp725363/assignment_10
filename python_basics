@@ -1,0 +1,77 @@
+1. How do you distinguish between shutil.copy() and shutil.copytree()?
+Ans:-
+These two function are used to copy  file in python as as below.
+shutil.copy() - this function used to a single file from source path to destination path while ,
+uses are as below.
+import shutil
+shutil.copy("source_file_path","destination_file_path")
+
+shutil.copytree() this funcction used for copy the the entire the directoy tree from the source path to destination path.
+uses are as below:-
+shutil.copytree("source_directory","destination_directory")
+
+
+2. What function is used to rename files??
+Ans:-
+in python os.rename() basically used to rename a file name , this function takes two argument to change the name as below.
+
+import os
+
+os.rename("existine_file_name.txt","new_file_name.txt")
+
+3. What is the difference between the delete functions in the send2trash and shutil modules?
+Ans:-
+sendtotrash:- provide an easy way to to sending file and directories to recycle bin instead of permanantly delete.
+
+shutil: The shutil module provides a function called shutil.rmtree() that can be used to delete a directory and its contents recursively. 
+This function permanently deletes the files and directories that are passed to it, without sending them to the trash or recycle bin. 
+This means that the deleted files and directories cannot be recovered using the standard file recovery mechanisms provided by the operating system.
+
+4.ZipFile objects have a close() method just like File objects’ close() method. What ZipFile method is
+equivalent to File objects’ open() method?
+Ans:-
+As open() used to open a file or direcoty here are zipfile constructer also used for open a zipfile 
+zipfile are used to creat a new objects that represents the zip archive file. constructor takes zip archive file as first argument and mode of opening same zip file as 
+second argement.
+
+import zipfile
+
+# Open a ZIP archive file in read mode
+with zipfile.ZipFile('archive.zip', 'r') as archive:
+    # Do something with the archive
+    pass
+    
+    
+5. Create a programme that searches a folder tree for files with a certain file extension (such as .pdf
+or .jpg). Copy these files from whatever location they are in to a new folder.
+Ans:-
+Here is an python programm  that contains file format (.pdf and .jpeg) as below:-
+import os
+import shutil
+
+# Set the source and destination folders
+source_folder = 'path/to/source/folder'
+destination_folder = 'path/to/destination/folder'
+
+# Set the file extension to search for
+file_extension = '.pdf'
+
+# Walk through the source folder tree
+for root, dirs, files in os.walk(source_folder):
+    for file in files:
+        # Check if the file has the desired extension
+        if file.endswith(file_extension):
+            # Create the destination folder if it doesn't exist
+            if not os.path.exists(destination_folder):
+                os.makedirs(destination_folder)
+            
+            # Construct the source and destination paths
+            source_path = os.path.join(root, file)
+            destination_path = os.path.join(destination_folder, file)
+            
+            # Copy the file to the destination folder
+            shutil.copy2(source_path, destination_path)
+            
+            # Print a message indicating the file was copied
+            print(f"Copied '{file}' from '{source_path}' to '{destination_path}'")
+
